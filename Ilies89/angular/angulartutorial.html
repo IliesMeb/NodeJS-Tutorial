@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Angular Tutorial</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+    </head>
+    <body>
+        <div ng-app="myApp" ng-controller="myController">
+            <p>
+                <input type="text" ng-model="inputValue" style="background-color:{{inputValue}};">
+            </p>
+            <p>
+                <span ng-bind="inputValue">
+                </span>
+            </p>
+            <input type="text" value="{{inputValue}}">
+            <p>
+                <span my-directive text-field-value="green"></span> Attribute -> A in restrict
+                <my-directive text-field-value="blue"></my-directive> Element -> E in restrict
+                <span class="my-directive" text-field-value="orange"></span> Class -> C in restrict
+            </p>
+        </div>
+        <script>
+            let app = angular.module("myApp", []);
+            app.controller("myController", function($scope){
+                $scope.inputValue = "Hey Sers";
+            });
+            app.directive("myDirective", function(){
+                return {
+                    scope: {
+                        startValue: "@textFieldValue"
+                    },
+                    restrict: "AEC",
+                    templateUrl: "myTemplate.html"
+                };
+            });
+        </script>
+    </body>
+</html>
