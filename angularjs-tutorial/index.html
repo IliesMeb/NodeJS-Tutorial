@@ -9,16 +9,11 @@
     <body>
         <div class="container">
             <div ng-controller="tutorialController">
-                <p>Hallo {{ "Welt" }}</p>
-                <p>Hallo {{ "Welt".length }} </p>
-                <p>Hallo {{ "Welt".length + 4 }} </p>
-                <p> {{ "Hallo" }} {{ "Welt" }} </p>
-                <p> {{ "Hallo" }} {{ "Welt" + "!" }} </p>
-                <p>Hallo {{ title }}</p>
-                <p>Der title besteht aus {{ title.length }} Buchstaben</p>
                 <!-- ng-model kann bei Formular Elementen benutzt werden -->
-                <input type="text" ng-model="title" > 
+                <!-- <input type="text" ng-model="title" >  -->
                 <!-- Die Veränderbarkeit während dem Schreiben beruht auf 2-way databinding -->
+                <p>Der Button wurde bisher {{ counter }} geklickt</p>
+                <button class="btn btn-primary" ng-click="incrementCounter()">Klick mich!</button>
             </div>
         </div>
     </body>
