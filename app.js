@@ -303,32 +303,91 @@
 // server.listen(8080);
 //-------------
 //Lektion 32/33:
+// var express = require("express");
+
+// var app = express();
+
+// app.use("/middleware", function(req, res, next) {
+//     console.log(req.url);
+//     // setTimeout(function() {
+//     //     next();
+//     // }, 5000);
+//     //next(); // Middleware, wir können Dateien ausliefern, Cookies bestimmen, Zugriff verweigern, etc, ohne den Code darunter zu beinflussen
+//     res.send("Middleware wurde aufgerufen")
+// });
+
+// app.get("/", function(req, res) {
+//     res.send("Hallo Welt 123");
+// });
+
+// app.get("/middleware/123", function(req, res) {
+//     console.log(req.url);
+// });
+
+// app.get("/startseite", function(req, res) { 
+//     res.send("ich bin die Startseite");
+// });
+
+
+
+// app.listen(8080);
+
+// ---------------
+
+//Lektion 35/36:
+
+//var express = require("express");
+
+// var app = express();
+
+// app.set("view engine", "ejs");
+// app.set("views", __dirname + "/views");
+
+// app.use("/public", express.static("public"));
+
+// app.get("/", function(req, res) {
+//     res.render("landing", {
+//         title: "NodeJs",
+//         items: [
+//             "express",
+//             "node",
+//             "javascript"
+//         ]
+//     }); //res.render("landing.ejs"); würde auch gehen
+// });
+
+// app.get("/startseite", function(req, res) { 
+//     res.send("ich bin die Startseite");
+// });
+
+// app.listen(8080);
+//-------------
+
+// Lektion 37: xss
+
 var express = require("express");
 
 var app = express();
 
-app.use("/middleware", function(req, res, next) {
-    console.log(req.url);
-    // setTimeout(function() {
-    //     next();
-    // }, 5000);
-    //next(); // Middleware, wir können Dateien ausliefern, Cookies bestimmen, Zugriff verweigern, etc, ohne den Code darunter zu beinflussen
-    res.send("Middleware wurde aufgerufen")
-});
+app.set("view engine", "ejs");
+app.set("views", __dirname + "/views");
+
+app.use("/public", express.static("public"));
 
 app.get("/", function(req, res) {
-    res.send("Hallo Welt");
-});
-
-app.get("/middleware/123", function(req, res) {
-    console.log(req.url);
+    res.render("landing", {
+        title: "NodeJs",
+        items: [
+            "express",
+            "node",
+            "javascript"
+        ],
+        desc: "<script type='text/javascript'>alert('hi');</script>"
+    }); //res.render("landing.ejs"); würde auch gehen
 });
 
 app.get("/startseite", function(req, res) { 
     res.send("ich bin die Startseite");
 });
 
-
-
 app.listen(8080);
-

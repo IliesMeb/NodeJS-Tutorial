@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <h1>Hallo Welt : <%= title %></h1>
+        <p>Ich bin ein Absatz</p>
+        <p>Die Liste besteht aus <%= items.length%> Einträgen</p>
+        <ul>
+            <% items.forEach(function(item) { %>
+            <li>
+                <%= item %> 
+            </li> 
+            <% }); %>
+        </ul>
+
+        <div>
+             <%- desc %> <!-- führt html code aus, Vertraut also der Quelle, deaktiviert escaping -->
+        </div>
+    </body>
+</html>
