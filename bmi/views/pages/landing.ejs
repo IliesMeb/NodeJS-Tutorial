@@ -1,0 +1,36 @@
+<%- include ("../partials/header") %>
+
+<div class="jumbotron">
+    <h1>BMI - Rechner</h1>
+    <p>Mit diesem Tool kannst du deinen BMI berechnen</p>
+</div>
+<form action="/result" method="GET" class="form-horizontal">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Bitte gib deine Daten ein:</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="height" class="col-sm-2 control-label">
+                    Größe (cm)
+                </label>
+                <div class="col-sm-10">
+                    <input name="cm" type="text" class="form-control" id="cm" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="height" class="col-sm-2 control-label">
+                    Gewicht (kg)
+                </label>
+                <div class="col-sm-10">
+                    <input name="kg" type="text" class="form-control" id="kg" />
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" class="btn btn-primary" value="Absenden!" />
+        </div>
+    </div>
+</form>
+
+<%- include ("../partials/footer") %>
