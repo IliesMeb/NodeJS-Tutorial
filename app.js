@@ -363,31 +363,193 @@
 // app.listen(8080);
 //-------------
 
-// Lektion 37: xss
+// // Lektion 37: xss
 
-var express = require("express");
+// var express = require("express");
 
-var app = express();
+// var app = express();
 
-app.set("view engine", "ejs");
-app.set("views", __dirname + "/views");
+// app.set("view engine", "ejs");
+// app.set("views", __dirname + "/views");
 
-app.use("/public", express.static("public"));
+// app.use("/public", express.static("public"));
 
-app.get("/", function(req, res) {
-    res.render("landing", {
-        title: "NodeJs",
-        items: [
-            "express",
-            "node",
-            "javascript"
-        ],
-        desc: "<script type='text/javascript'>alert('hi');</script>"
-    }); //res.render("landing.ejs"); würde auch gehen
+// app.get("/", function(req, res) {
+//     res.render("landing", {
+//         title: "NodeJs",
+//         items: [
+//             "express",
+//             "node",
+//             "javascript"
+//         ],
+//         desc: "<script type='text/javascript'>alert('hi');</script>"
+//     }); //res.render("landing.ejs"); würde auch gehen
+// });
+
+// app.get("/startseite", function(req, res) { 
+//     res.send("ich bin die Startseite");
+// });
+
+// app.listen(8080);
+//--------------
+
+//Lektion 48:
+
+//var a = {};
+
+// // a.test = "hallo welt"; // übergibt dem Objekt a key = test mit dem Value = "hallo welt"
+// Object.defineProperty(a, "test", {
+//     value: "hallo welt",
+//     enumerable: true, // lässt objekt auch in der console anzeige
+//     writable: true, // lässt Objekt überschreibbar machen
+//     configurable: true //delete 
+// });
+
+// a.test = "hallo nodejs"
+
+// //delete a.test
+
+// console.log(a);
+
+
+
+
+// var a = {
+//     firstname: "Erik",
+//     surname: "Müller"
+// };
+
+// Object.defineProperty(a, "name", {
+//     get: function() {
+//         return this.firstname + " " + this.surname;
+//     },
+//     set: function(name) {
+//         var segments = name.split(" ");
+//         this.firstname = segments[0];
+//         this.surname = segments[1];
+//     }
+// });
+
+// a.name = "Max Mustermann";
+
+// console.log(a);
+
+
+
+
+// function Student() {
+
+// };
+
+// Object.defineProperty(Student.prototype, "name", {
+//         get: function() {
+//             return this.firstname + " " + this.surname;
+//         },
+//         set: function(name) {
+//             var segments = name.split(" ");
+//             this.firstname = segments[0];
+//             this.surname = segments[1];
+//         }
+//     });
+
+//     var max = new Student();
+//     max.name = "Max Mustermann"
+//     console.log(max)
+
+//-------------------
+
+// //Lektion 49:
+
+// var l = [
+//     "element1",
+//     "hallo welt",
+//     "attribut"
+// ];
+
+// // for(var i = 0; i < l.length; i++) { // solange i kleiner als l.length ist soll i eins mehr werden und dann die funktion (in dem Fall das value an Position i ausspucken) durchgeführt werden. 
+// //     var value = l[i];
+// //     console.log(value);
+// // };
+
+// // l.forEach(function(value, index){
+// //     console.log(value, index);
+// // });
+
+// // console.log(l.map(function(value, index) {
+// //     return value.toUpperCase();
+// // }));
+
+// console.log(l.filter(function(value, index) {
+//     return (value.indexOf("a") != -1);
+// }));
+//---------------
+
+// //Lektion 50:
+
+// var a = {
+//     firstname: "Max",
+//     surname: "Mustermann"
+// };
+
+// for(var key in a) {
+//     var value = a[key]
+//     console.log(key + ": " + value);
+// };
+
+//--------
+
+//Lektion 51:
+
+// function Student() {
+
+// };
+
+// Object.defineProperty(Student.prototype, "name", {
+//     enumerable: true,
+//     get: function() {
+//         return this.firstname + " " + this.surname;
+//     }
+// });
+
+// var max = new Student();
+// max.firstname = "Max";
+// max.surname = "Mustermann";
+
+// for(var key in max) {
+//     if (max.hasOwnProperty(key)) { // braucht man, wenn man einen Prototype hat, diesen aber ignorieren will
+//         var value = max[key];
+//         console.log(key + ": " + value);
+//     }
+// };
+//-----------------
+
+//Lektion 53: 
+
+var util = require("util");
+var EventEmitter = require("events");
+
+function Course() {
+
+}
+util.inherits(Course, EventEmitter);
+
+Course.prototype.register = function() {
+    this.emit("register");
+}
+
+//var course = new EventEmitter();
+var course = new Course();
+
+
+course.on("register", function(data) {
+    console.log(data);
+    console.log("register wurde ausgeführt");
+});
+course.on("register", function() {
+    console.log("register wurde ausgeführt(2)");
 });
 
-app.get("/startseite", function(req, res) { 
-    res.send("ich bin die Startseite");
-});
 
-app.listen(8080);
+course.register();
+course.emit("watchLecture"); 
+
